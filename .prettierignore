@@ -1,0 +1,22 @@
+# Build Outputs
+.output/
+dist/
+.wxt/
+
+# Dependencies
+node_modules/
+
+# Lock files and miscellaneous
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+*.min.*
+.env*
+.gitignore
+
+# Artifacts
+build
+coverage
+
+# Documentation
+README.md
