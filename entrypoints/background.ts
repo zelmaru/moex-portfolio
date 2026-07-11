@@ -3,5 +3,5 @@ import { browser } from 'wxt/browser';
 export default defineBackground(() => {
   browser.sidePanel
     .setPanelBehavior({ openPanelOnActionClick: true })
-    .catch((error: unknown) => console.error(error));
+    .catch((error: unknown) => { console.error(error); });
 });
