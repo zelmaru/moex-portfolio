@@ -12,7 +12,7 @@ export default defineConfig({
   manifest: {
     permissions: ['sidePanel'],
     action: {
-      default_popup: '', // prevent popup from overriding side panel - empty string required
+      default_popup: '', // Prevent popup from overriding side panel - empty string required
     },
   },
 });
