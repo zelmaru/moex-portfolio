@@ -3,7 +3,7 @@ import tailwindcssAnimate from 'tailwindcss-animate';
 /** @type {import('tailwindcss').Config} */
 export default {
   darkMode: ['class'],
-  content: ['./entrypoints/**/*.{html,ts,tsx}'],
+  content: ['./src/**/*.{html,ts,tsx}'],
   theme: {
     extend: {
       borderRadius: {
