@@ -15,4 +15,5 @@ export default defineConfig({
       default_popup: '', // Prevent popup from overriding side panel - empty string required
     },
   },
+  srcDir: 'src',
 });
