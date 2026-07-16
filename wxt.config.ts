@@ -2,7 +2,12 @@ import { defineConfig } from 'wxt';
 
 // See https://wxt.dev/api/config.html
 export default defineConfig({
-  modules: ['@wxt-dev/module-react'],
+  modules: ['@wxt-dev/module-react', '@wxt-dev/auto-icons'],
+  autoIcons: {
+    baseIconPath: 'assets/moex-portfolio-logo.svg',
+    // Disable the grayscale/overlay during dev mode
+    developmentIndicator: false,
+  },
   // Correct structural mapping for ESLint v9 flat config generation
   imports: {
     eslintrc: {
