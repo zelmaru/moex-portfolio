@@ -2,6 +2,7 @@ import tailwindcssAnimate from 'tailwindcss-animate';
 
 /** @type {import('tailwindcss').Config} */
 export default {
+  // FIX: Change 'class' or 'media' to an array using the 'variant' selector strategy
   darkMode: ['class'],
   content: ['./src/**/*.{html,ts,tsx}'],
   theme: {
@@ -57,4 +58,3 @@ export default {
   },
   plugins: [tailwindcssAnimate],
 };
-

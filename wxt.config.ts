@@ -15,7 +15,7 @@ export default defineConfig({
     },
   },
   manifest: {
-    permissions: ['sidePanel'],
+    permissions: ['sidePanel', 'storage'],
     action: {
       default_popup: '', // Prevent popup from overriding side panel - empty string required
     },

@@ -1,8 +1,15 @@
+import ThemeToggleButton from '@/components/ThemeButton';
+import { ThemeProvider } from '@/context/ThemeProvider';
+
 const App = () => {
   return (
-    <>
-      <h1>MOEX Портфель</h1>
-    </>
+    <ThemeProvider>
+      <header className="flex items-center justify-end p-2">
+        <nav>
+          <ThemeToggleButton />
+        </nav>
+      </header>
+    </ThemeProvider>
   );
 };
 
