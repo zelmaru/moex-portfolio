@@ -13,3 +13,11 @@ export interface MoexTicker {
   price: number;
   percentChange24h: number;
 }
+
+export interface EducationalArticle {
+  id: string;
+  title: string;
+  summary: string;
+  content: string;
+  conclusion: string;
+}

@@ -7,7 +7,7 @@ const ThemeToggleButton = () => {
 
   return (
     <Button
-      variant="outline"
+      variant="ghost"
       size="icon"
       onClick={() => {
         toggleTheme().catch((err: unknown) => {
