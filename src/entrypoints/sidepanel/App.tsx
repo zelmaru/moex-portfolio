@@ -4,6 +4,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { PAGES } from '@/types';
 import MarketPage from './pages/MarketPage';
 import PortfolioPage from './pages/PortfolioPage';
+import AcademyPage from './pages/AcademyPage';
 
 const App = () => {
   return (
@@ -23,6 +24,12 @@ const App = () => {
             >
               Портфель
             </TabsTrigger>
+            <TabsTrigger
+              value={PAGES.ACADEMY}
+              className="rounded-none data-[state=active]:border-b-2 data-[state=active]:border-foreground data-[state=active]:shadow-none"
+            >
+              Академия
+            </TabsTrigger>
           </TabsList>
           <ThemeToggleButton />
         </header>
@@ -31,6 +38,9 @@ const App = () => {
         </TabsContent>
         <TabsContent value={PAGES.PORTFOLIO}>
           <PortfolioPage />
+        </TabsContent>
+        <TabsContent value={PAGES.ACADEMY}>
+          <AcademyPage />
         </TabsContent>
       </Tabs>
     </ThemeProvider>
