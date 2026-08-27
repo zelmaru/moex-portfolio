@@ -1,4 +1,3 @@
-/* eslint-disable react/function-component-definition */
 import * as React from 'react';
 import { cva, type VariantProps } from 'class-variance-authority';
 

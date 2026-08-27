@@ -4,9 +4,15 @@ import reactPlugin from 'eslint-plugin-react';
 import hooksPlugin from 'eslint-plugin-react-hooks';
 
 export default tseslint.config(
-  // 1. Ignore build files, node_modules, and cache folders
+  // 1. Ignore build files, node_modules, cache folders and Shadcn components
   {
-    ignores: ['.output/**/*', 'dist/**/*', 'node_modules/**/*', '.wxt/**/*'],
+    ignores: [
+      '.output/**/*',
+      'dist/**/*',
+      'node_modules/**/*',
+      '.wxt/**/*',
+      'src/components/ui/**',
+    ],
   },
 
   // 2. Load standard and strict rules for code quality
