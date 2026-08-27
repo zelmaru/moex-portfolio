@@ -14,8 +14,18 @@ export interface MoexTicker {
   percentChange24h: number;
 }
 
+export const ARTICLE_CATEGORIES = {
+  BASICS: 'basics',
+  PSYCHOLOGY: 'psychology',
+  RISK: 'risk',
+} as const;
+
+export type ArticleCategoryType = (typeof ARTICLE_CATEGORIES)[keyof typeof ARTICLE_CATEGORIES];
+
 export interface EducationalArticle {
   id: string;
+  category: ArticleCategoryType;
+  publishedAt: string; //format YYYY-MM-DDTHH:mm:ss.sssZ (ISO 8601 UTC)
   title: string;
   summary: string;
   content: string;
