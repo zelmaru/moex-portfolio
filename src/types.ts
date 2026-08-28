@@ -21,6 +21,7 @@ export const ARTICLE_CATEGORIES = {
 } as const;
 
 export type ArticleCategoryType = (typeof ARTICLE_CATEGORIES)[keyof typeof ARTICLE_CATEGORIES];
+export type ArticleCategoryFilterType = 'all' | ArticleCategoryType;
 
 export interface EducationalArticle {
   id: string;

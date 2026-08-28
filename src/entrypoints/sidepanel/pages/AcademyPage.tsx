@@ -5,23 +5,33 @@ import {
   InputGroupButton,
   InputGroupInput,
 } from '@/components/ui/input-group';
+import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group';
 import { ACADEMY_ARTICLES } from '@/lib/academyArticles';
-import { EducationalArticle } from '@/types';
+import { EducationalArticle, ArticleCategoryFilterType, ARTICLE_CATEGORIES } from '@/types';
 import { ChevronLeft, Search, X } from 'lucide-react';
 
+const TOGGLE_CATEGORIES: { id: ArticleCategoryFilterType; label: string }[] = [
+  { id: 'all', label: 'Все' },
+  { id: ARTICLE_CATEGORIES.BASICS, label: 'Основы' },
+  { id: ARTICLE_CATEGORIES.PSYCHOLOGY, label: 'Психология' },
+  { id: ARTICLE_CATEGORIES.RISK, label: 'Риски' },
+];
 const AcademyPage = () => {
   const [activeArticle, setActiveArticle] = useState<EducationalArticle | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
+  const [selectedCategoryId, setSelectedCategoryId] = useState('all');
 
   const filteredArticles = useMemo(() => {
     const normalizedSearchQuery = searchQuery.trim().toLowerCase();
-    return ACADEMY_ARTICLES.filter((article) =>
+    return ACADEMY_ARTICLES.filter(
+      (article) => selectedCategoryId === 'all' || article.category === selectedCategoryId,
+    ).filter((article) =>
       [article.id, article.title, article.summary, article.content, article.conclusion]
         .join(' ')
         .toLowerCase()
         .includes(normalizedSearchQuery),
     );
-  }, [searchQuery]);
+  }, [searchQuery, selectedCategoryId]);
 
   return activeArticle ? (
     <div className="p-4">
@@ -45,6 +55,7 @@ const AcademyPage = () => {
       <div className="p-4">
         <InputGroup>
           <InputGroupInput
+            className="text-sm"
             placeholder="Поиск"
             value={searchQuery}
             onChange={(e) => {
@@ -69,6 +80,28 @@ const AcademyPage = () => {
             )}
           </InputGroupAddon>
         </InputGroup>
+        <ToggleGroup
+          variant="outline"
+          defaultValue={TOGGLE_CATEGORIES[0].id}
+          type="single"
+          className="mt-4 flex justify-start"
+          size="xs"
+          value={selectedCategoryId}
+          onValueChange={(value) => {
+            setSelectedCategoryId(value || 'all'); // shadcn sets value to "" by default on untoggle
+          }}
+        >
+          {TOGGLE_CATEGORIES.map((category) => (
+            <ToggleGroupItem
+              key={category.id}
+              value={category.id}
+              className="text-xs"
+              aria-label={`Выбрать категорию ${category.label}`}
+            >
+              {category.label}
+            </ToggleGroupItem>
+          ))}
+        </ToggleGroup>
       </div>
       <ul className="divide-y divide-border text-sm">
         {filteredArticles.map((article) => (
@@ -85,6 +118,11 @@ const AcademyPage = () => {
           </li>
         ))}
       </ul>
+      {filteredArticles.length === 0 && (
+        <div className="p-4 text-xs text-muted-foreground">
+          Ничего не найдено. Попробуйте изменить запрос.
+        </div>
+      )}
     </>
   );
 };
