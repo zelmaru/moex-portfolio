@@ -20,6 +20,14 @@ const AcademyPage = () => {
   const [activeArticle, setActiveArticle] = useState<EducationalArticle | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategoryId, setSelectedCategoryId] = useState('all');
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+
+  // scroll to the top
+  useEffect(() => {
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollTop = 0;
+    }
+  }, [searchQuery, selectedCategoryId, activeArticle]);
 
   const filteredArticles = useMemo(() => {
     const normalizedSearchQuery = searchQuery.trim().toLowerCase();
@@ -34,25 +42,29 @@ const AcademyPage = () => {
   }, [searchQuery, selectedCategoryId]);
 
   return activeArticle ? (
-    <div className="p-4">
-      <Button
-        variant="ghost"
-        size="icon"
-        onClick={() => {
-          setActiveArticle(null);
-        }}
-      >
-        <ChevronLeft />
-      </Button>
-      <article className="flex flex-col gap-4 pt-4 text-sm">
-        <h2 className="text-lg font-bold">{activeArticle.title}</h2>
-        <p className="whitespace-pre-line leading-relaxed">{activeArticle.content}</p>
-        <p className="font-semibold">{activeArticle.conclusion}</p>
-      </article>
-    </div>
+    <>
+      <div className="flex flex-shrink-0 flex-col px-4 pb-4">
+        <Button
+          variant="ghost"
+          size="icon"
+          onClick={() => {
+            setActiveArticle(null);
+          }}
+        >
+          <ChevronLeft />
+        </Button>
+      </div>
+      <div className="min-h-0 flex-1 overflow-y-auto px-4 pb-4" ref={scrollContainerRef}>
+        <article className="flex flex-col gap-4 text-sm">
+          <h2 className="text-lg font-bold">{activeArticle.title}</h2>
+          <p className="whitespace-pre-line leading-relaxed">{activeArticle.content}</p>
+          <p className="font-semibold">{activeArticle.conclusion}</p>
+        </article>
+      </div>
+    </>
   ) : (
     <>
-      <div className="p-4">
+      <div className="flex flex-shrink-0 flex-col px-4 pb-4">
         <InputGroup>
           <InputGroupInput
             className="text-sm"
@@ -103,21 +115,23 @@ const AcademyPage = () => {
           ))}
         </ToggleGroup>
       </div>
-      <ul className="divide-y divide-border text-sm">
-        {filteredArticles.map((article) => (
-          <li key={article.id}>
-            <button
-              className="flex w-full flex-col gap-2 p-4 text-left transition-colors hover:bg-muted/50 focus-visible:bg-muted/50 focus-visible:outline-none"
-              onClick={() => {
-                setActiveArticle(article);
-              }}
-            >
-              <span className="font-bold leading-none">{article.title}</span>
-              <p className="text-muted-foreground">{article.summary}</p>
-            </button>
-          </li>
-        ))}
-      </ul>
+      <div className="min-h-0 flex-1 overflow-y-auto" ref={scrollContainerRef}>
+        <ul className="divide-y divide-border text-sm">
+          {filteredArticles.map((article) => (
+            <li key={article.id}>
+              <button
+                className="flex w-full flex-col gap-2 p-4 text-left transition-colors hover:bg-muted/50 focus-visible:bg-muted/50 focus-visible:outline-none"
+                onClick={() => {
+                  setActiveArticle(article);
+                }}
+              >
+                <span className="font-bold leading-none">{article.title}</span>
+                <p className="text-muted-foreground">{article.summary}</p>
+              </button>
+            </li>
+          ))}
+        </ul>
+      </div>
       {filteredArticles.length === 0 && (
         <div className="p-4 text-xs text-muted-foreground">
           Ничего не найдено. Попробуйте изменить запрос.

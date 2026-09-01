@@ -39,7 +39,10 @@ const App = () => {
         <TabsContent value={PAGES.PORTFOLIO} className="flex-1 overflow-y-auto">
           <PortfolioPage />
         </TabsContent>
-        <TabsContent value={PAGES.ACADEMY} className="flex-1 overflow-y-auto">
+        <TabsContent
+          value={PAGES.ACADEMY}
+          className="min-h-0 flex-1 overflow-hidden data-[state=active]:flex data-[state=active]:flex-col"
+        >
           <AcademyPage />
         </TabsContent>
       </Tabs>
