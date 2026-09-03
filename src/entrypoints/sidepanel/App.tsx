@@ -4,7 +4,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { PAGES } from '@/types';
 import MarketPage from './pages/MarketPage';
 import PortfolioPage from './pages/PortfolioPage';
-import AcademyPage from './pages/AcademyPage';
+import AcademyPage from './pages/AcademyPage/AcademyPage';
 
 const App = () => {
   return (

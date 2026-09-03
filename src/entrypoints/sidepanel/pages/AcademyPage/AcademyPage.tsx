@@ -10,6 +10,8 @@ import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group';
 import { ACADEMY_ARTICLES } from '@/lib/academyArticles';
 import { EducationalArticle, ArticleCategoryFilterType, ARTICLE_CATEGORIES } from '@/types';
 import { ChevronLeft, Search, X } from 'lucide-react';
+import AcademyQuiz from './AcademyQuiz';
+import { useArticleStore } from '@/store/articleStore';
 
 const TOGGLE_CATEGORIES: { id: ArticleCategoryFilterType; label: string }[] = [
   { id: 'all', label: 'Все' },
@@ -18,7 +20,7 @@ const TOGGLE_CATEGORIES: { id: ArticleCategoryFilterType; label: string }[] = [
   { id: ARTICLE_CATEGORIES.RISK, label: 'Риски' },
 ];
 const AcademyPage = () => {
-  const [activeArticle, setActiveArticle] = useState<EducationalArticle | null>(null);
+  const { activeArticle, setActiveArticle } = useArticleStore();
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategoryId, setSelectedCategoryId] = useState('all');
 
@@ -132,6 +134,13 @@ const AcademyPage = () => {
           <p className="whitespace-pre-line leading-relaxed">{activeArticle.content}</p>
           <p className="font-semibold">{activeArticle.conclusion}</p>
         </article>
+        <section>
+          <AcademyQuiz
+            key={activeArticle.id} // on article change the state of the component will reset
+            articleId={activeArticle.id}
+            quiz={activeArticle.quiz}
+          />
+        </section>
       </PageContainer.Content>
     </PageContainer>
   ) : (

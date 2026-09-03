@@ -23,6 +23,18 @@ export const ARTICLE_CATEGORIES = {
 export type ArticleCategoryType = (typeof ARTICLE_CATEGORIES)[keyof typeof ARTICLE_CATEGORIES];
 export type ArticleCategoryFilterType = 'all' | ArticleCategoryType;
 
+export interface QuizOption {
+  id: string;
+  text: string;
+}
+
+export interface QuizQuestion {
+  id: string;
+  question: string;
+  options: QuizOption[];
+  correctOptionId: string;
+}
+
 export interface EducationalArticle {
   id: string;
   category: ArticleCategoryType;
@@ -31,4 +43,11 @@ export interface EducationalArticle {
   summary: string;
   content: string;
   conclusion: string;
+  quiz: QuizQuestion[];
+}
+
+export interface QuizResult {
+  score: number;
+  total: number;
+  completedAt: string;
 }
